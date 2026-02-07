@@ -36,4 +36,10 @@ public class Course {
     public void setProgram(String program){
         this.program = program;
     }
+
+    public void display(){
+        System.out.println("\nCourse ID:" + getCourseID());
+        System.out.println("Course Name:" + getCourseName());
+        System.out.println("Program:" + getProgram());
+    }
 }

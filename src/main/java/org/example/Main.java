@@ -9,35 +9,28 @@ public class Main {
         student.setStudentName("John Doe");
         student.setProgram("Information Technology");
 
-        System.out.println("\nStudent ID:" + student.getStudentID());
-        System.out.println("Student Name:" + student.getStudentName());
-        System.out.println("Program:\n" + student.getProgram());
+        student.display();
 
         Student student2 = new Student();
-        student.setStudentID("000124");
-        student.setStudentName("Jane Doe");
-        student.setProgram("Information Technology");
+        student2.setStudentID("000124");
+        student2.setStudentName("Jane Doe");
+        student2.setProgram("Information Technology");
 
-        System.out.println("\nStudent ID:" + student.getStudentID());
-        System.out.println("Student Name:" + student.getStudentName());
-        System.out.println("Program:\n" + student.getProgram());
+        student2.display();
 
         Course course = new Course();
         course.setCourseID("000123");
-        course.setCourseName("John Doe");
+        course.setCourseName("Integrative Programming");
         course.setProgram("Information Technology");
 
-        System.out.println("\nCourse ID:" + course.getCourseID());
-        System.out.println("Course Name:" + course.getCourseName());
-        System.out.println("Program:\n" + course.getProgram());
+        course.display();
 
         Course course2 = new Course();
-        course.setCourseID("000123");
-        course.setCourseName("Jane Doe");
-        course.setProgram("Information Technology");
+        course2.setCourseID("000123");
+        course2.setCourseName("Integrative Programming");
+        course2.setProgram("Information Technology");
 
-        System.out.println("\nCourse ID:" + course.getCourseID());
-        System.out.println("Course Name:" + course.getCourseName());
-        System.out.println("Program:\n" + course.getProgram());
+        course2.display();
+
     }
 }
