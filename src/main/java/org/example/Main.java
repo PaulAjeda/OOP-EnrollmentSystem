@@ -19,14 +19,14 @@ public class Main {
         student2.display();
 
         Course course = new Course();
-        course.setCourseID("000123");
+        course.setCourseID("0001");
         course.setCourseName("Integrative Programming");
         course.setProgram("Information Technology");
 
         course.display();
 
         Course course2 = new Course();
-        course2.setCourseID("000123");
+        course2.setCourseID("0001");
         course2.setCourseName("Integrative Programming");
         course2.setProgram("Information Technology");
 
