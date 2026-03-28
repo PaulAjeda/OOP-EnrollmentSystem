@@ -59,6 +59,11 @@ public class Student extends Person{
                 ", program='" + program + '\'' +
                 '}';
     }
+
+    @Override
+    public void mainTask(){
+        System.out.println("I Study");
+    }
 }
 
 
