@@ -254,6 +254,14 @@ public class Main {
         } while (mainChoice != 0);
 
         hh.close();
+
+        Instructor instructor = new Instructor();
+        System.out.print("Instructor's Main Task: ");
+        instructor.mainTask();
+
+        Student student = new Student();
+        System.out.print("Student's Main Task: ");
+        student.mainTask();
     }
 }
 
