@@ -18,15 +18,14 @@ public class CourseRegistration {
     }
 
     //Update
-    public void updateCourse(Course course){
-
-        for(int i = 0; i < courseList.size();i++){
-            if(courseList.get(i).getCourseID() == (course.getCourseID())){
-
+    public String updateCourse(Course course){
+        for (int i = 0; i < courseList.size(); i++){
+            if(courseList.get(i).getCourseID() == course.getCourseID()){
                 courseList.set(i, course);
-                break;
+                return "Course updated successfully";
             }
         }
+        return "Course not found";
     }
     //Remove
     public String delete(Course course){
@@ -37,5 +36,13 @@ public class CourseRegistration {
             }
         }
         return "Error";
+    }
+
+    @Override
+    public String toString() {
+        return "CourseRegistration{" +
+                "courseList=" + courseList +
+                ", hh=" + hh +
+                '}';
     }
 }

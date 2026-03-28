@@ -1,7 +1,7 @@
 package org.example.service;
 
-import org.example.model.Student;
 import java.util.*;
+import org.example.model.Student;
 
 public class StudentRegistration {
     private ArrayList<Student> studentList = new ArrayList<>();

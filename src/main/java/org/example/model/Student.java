@@ -1,6 +1,6 @@
 package org.example.model;
 
-public class Student {
+public class Student extends Person{
     private int StudentID;
     private String studentName;
     private String program;
@@ -18,7 +18,7 @@ public class Student {
         }
 
         public Student(int ID, String name, String program) {
-
+        super(ID, name);
         this.StudentID = ID;
         this.studentName = name;
         this.program = program;
