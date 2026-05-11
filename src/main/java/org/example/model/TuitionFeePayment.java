@@ -1,11 +1,11 @@
 package org.example.model;
 
-public class TuitionPayment {
+public class TuitionFeePayment {
     private int studentID;
     private double totalFee;
     private double paidAmount;
 
-    public TuitionPayment(int studentID, double totalFee) {
+    public TuitionFeePayment(int studentID, double totalFee) {
         this.studentID = studentID;
         this.totalFee = totalFee;
         this.paidAmount = 0.0;
@@ -37,7 +37,7 @@ public class TuitionPayment {
 
     @Override
     public String toString() {
-        return "TuitionPayment{" +
+        return "TuitionFeePayment{" +
                 "studentID=" + studentID +
                 ", totalFee=" + totalFee +
                 ", paidAmount=" + paidAmount +

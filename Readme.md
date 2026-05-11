@@ -108,4 +108,47 @@ TuitionFeePayment
 
 TuitionFeePaymentImpl
 
+**7. Phase 1: The Architectural Shift**
+
+NewEntity-Enrollment
+
+---Interfaces Contracts---
+
+IStudentService:
+
 ![img_25.png](img_25.png)
+
+IInstructorService:
+
+![img_26.png](img_26.png)
+
+ICourseService: 
+
+![img_27.png](img_27.png)
+
+ITuitionService
+
+![img_28.png](img_28.png)
+
+IEnrollmentService:
+
+![img_29.png](img_29.png)
+
+NewEntity-Enrollment Added
+
+![img_30.png](img_30.png)
+
+**Phase 2: Minimum Coding Requirements**
+
+Institutional Hierarchy Viewing
+
+![img_31.png](img_31.png)
+
+Critical Validation
+
+![img_32.png](img_32.png)
+![img_33.png](img_33.png)
+![img_34.png](img_34.png)
+![img_35.png](img_35.png)
+![img_36.png](img_36.png)
+![img_37.png](img_37.png)
