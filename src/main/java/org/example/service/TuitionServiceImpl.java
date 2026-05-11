@@ -12,7 +12,7 @@ public class TuitionServiceImpl implements ITuitionService {
     @Override
     public void calculateFee(int studentID, int units) throws EnrollmentException {
         if (units <= 0) throw new InvalidInputException("Academic units must be positive.");
-
+        
         double totalFee = units * RATE_PER_UNIT;
         if (paymentMap.containsKey(studentID)) {
             paymentMap.get(studentID).setTotalFee(totalFee);
@@ -25,7 +25,7 @@ public class TuitionServiceImpl implements ITuitionService {
     @Override
     public String makePayment(int studentID, double amount) throws EnrollmentException {
         if (amount <= 0) throw new InvalidInputException("Payment amount must be positive.");
-
+        
         TuitionFeePayment payment = paymentMap.get(studentID);
         if (payment != null) {
             payment.addPayment(amount);
