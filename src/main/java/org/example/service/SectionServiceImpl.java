@@ -2,6 +2,7 @@ package org.example.service;
 
 import org.example.model.Section;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SectionServiceImpl implements ISectionService {
     private ArrayList<Section> sectionList = new ArrayList<>();
@@ -36,5 +37,10 @@ public class SectionServiceImpl implements ISectionService {
             }
         }
         return "Section not found";
+    }
+
+    @Override
+    public List<Section> getAllSections() {
+        return sectionList;
     }
 }

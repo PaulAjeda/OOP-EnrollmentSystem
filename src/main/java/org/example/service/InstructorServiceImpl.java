@@ -3,6 +3,7 @@ package org.example.service;
 import org.example.model.Instructor;
 import org.example.model.Section;
 import java.util.ArrayList;
+import java.util.List;
 
 public class InstructorServiceImpl implements IInstructorService {
     private ArrayList<Instructor> instructorList = new ArrayList<>();
@@ -41,6 +42,7 @@ public class InstructorServiceImpl implements IInstructorService {
 
     @Override
     public String assignInstructorToSection(Instructor instructor, Section section) {
+        section.setAssignedInstructor(instructor);
         return "Instructor " + instructor.getName() + " assigned to Section " + section.getSectionName();
     }
 
@@ -53,5 +55,10 @@ public class InstructorServiceImpl implements IInstructorService {
             }
         }
         System.out.println("Instructor not found.");
+    }
+
+    @Override
+    public List<Instructor> getAllInstructors() {
+        return instructorList;
     }
 }

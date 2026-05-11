@@ -2,6 +2,7 @@ package org.example.service;
 
 import org.example.model.Department;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DepartmentServiceImpl implements IDepartmentService {
     private ArrayList<Department> departmentList = new ArrayList<>();
@@ -36,5 +37,10 @@ public class DepartmentServiceImpl implements IDepartmentService {
             }
         }
         return "Department not found";
+    }
+
+    @Override
+    public List<Department> getAllDepartments() {
+        return departmentList;
     }
 }

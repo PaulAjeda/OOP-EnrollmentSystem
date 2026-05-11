@@ -4,12 +4,14 @@ public class Section {
     private int sectionID;
     private String sectionName;
     private int maxCapacity;
+    private int departmentID; // Added for hierarchy
+    private Instructor assignedInstructor; // Added for hierarchy
 
     public Section() {
     }
 
     public Section(int sectionID, String sectionName) {
-        this(sectionID, sectionName, 30); // Default capacity
+        this(sectionID, sectionName, 30);
     }
 
     public Section(int sectionID, String sectionName, int maxCapacity) {
@@ -42,12 +44,30 @@ public class Section {
         this.maxCapacity = maxCapacity;
     }
 
+    public int getDepartmentID() {
+        return departmentID;
+    }
+
+    public void setDepartmentID(int departmentID) {
+        this.departmentID = departmentID;
+    }
+
+    public Instructor getAssignedInstructor() {
+        return assignedInstructor;
+    }
+
+    public void setAssignedInstructor(Instructor assignedInstructor) {
+        this.assignedInstructor = assignedInstructor;
+    }
+
     @Override
     public String toString() {
         return "Section{" +
                 "sectionID=" + sectionID +
                 ", sectionName='" + sectionName + '\'' +
                 ", maxCapacity=" + maxCapacity +
+                ", deptID=" + departmentID +
+                ", instructor=" + (assignedInstructor != null ? assignedInstructor.getName() : "None") +
                 '}';
     }
 }

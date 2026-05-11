@@ -25,7 +25,8 @@ public class Main {
                 sectionService,
                 departmentService,
                 tuitionService,
-                enrollmentService
+                enrollmentService,
+                instructorService
         );
 
         int mainChoice;
@@ -218,7 +219,11 @@ public class Main {
                                 String secname = hh.nextLine();
                                 System.out.print("Enter Max Capacity: ");
                                 int cap = hh.nextInt();
-                                campusRegistrar.addSection(new Section(secid, secname, cap));
+                                System.out.print("Enter Department ID: ");
+                                int sdeptid = hh.nextInt();
+                                Section newSec = new Section(secid, secname, cap);
+                                newSec.setDepartmentID(sdeptid);
+                                campusRegistrar.addSection(newSec);
                                 System.out.println("Section added.");
                                 break;
                             case 2:
@@ -232,8 +237,10 @@ public class Main {
                                 secname = hh.nextLine();
                                 System.out.print("New Max Capacity: ");
                                 cap = hh.nextInt();
-                                Section s = new Section(secid, secname);
-                                s.setMaxCapacity(cap);
+                                System.out.print("New Department ID: ");
+                                sdeptid = hh.nextInt();
+                                Section s = new Section(secid, secname, cap);
+                                s.setDepartmentID(sdeptid);
                                 System.out.println(campusRegistrar.updateSection(s));
                                 break;
                             case 4:
@@ -342,7 +349,8 @@ public class Main {
                     do {
                         System.out.println("\nENROLLMENT MENU");
                         System.out.println("[1] Enroll Student in Section");
-                        System.out.println("[2] View Department Hierarchy");
+                        System.out.println("[2] Assign Instructor to Section");
+                        System.out.println("[3] View Institutional Hierarchy");
                         System.out.println("[0] Back");
                         System.out.print("Enter choice: ");
                         eChoice = hh.nextInt();
@@ -354,9 +362,47 @@ public class Main {
                                 int esid = hh.nextInt();
                                 System.out.print("Enter Section ID: ");
                                 int esecid = hh.nextInt();
-                                System.out.println(campusRegistrar.enrollStudentInSection(new Student(esid), new Section(esecid, "Target Section")));
+
+                                // Lookup student and section from real lists
+                                Student targetStudent = null;
+                                for (Student stu : campusRegistrar.getAllStudents()) {
+                                    if (stu.getStudentID() == esid) { targetStudent = stu; break; }
+                                }
+                                Section targetSection = null;
+                                for (Section sec : campusRegistrar.getAllSections()) {
+                                    if (sec.getSectionID() == esecid) { targetSection = sec; break; }
+                                }
+
+                                if (targetStudent != null && targetSection != null) {
+                                    System.out.println(campusRegistrar.enrollStudentInSection(targetStudent, targetSection));
+                                } else {
+                                    System.out.println("Error: Student or Section not found.");
+                                }
                                 break;
+
                             case 2:
+                                System.out.print("Enter Instructor ID: ");
+                                int insid = hh.nextInt();
+                                System.out.print("Enter Section ID: ");
+                                int isecid = hh.nextInt();
+
+                                Instructor targetIns = null;
+                                for (Instructor ins : instructorService.getAllInstructors()) {
+                                    if (ins.getID() == insid) { targetIns = ins; break; }
+                                }
+                                Section targetSec2 = null;
+                                for (Section sec : campusRegistrar.getAllSections()) {
+                                    if (sec.getSectionID() == isecid) { targetSec2 = sec; break; }
+                                }
+
+                                if (targetIns != null && targetSec2 != null) {
+                                    System.out.println(campusRegistrar.assignInstructorToSection(targetIns, targetSec2));
+                                } else {
+                                    System.out.println("Error: Instructor or Section not found.");
+                                }
+                                break;
+
+                            case 3:
                                 campusRegistrar.viewDepartmentHierarchy();
                                 break;
                         }
