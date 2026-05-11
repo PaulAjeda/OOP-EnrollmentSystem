@@ -1,28 +1,30 @@
 package org.example;
 
 import java.util.*;
-
-import org.example.model.Student;
-import org.example.model.Course;
-import org.example.model.Instructor;
-import org.example.service.StudentRegistration;
-import org.example.service.CourseRegistration;
-import org.example.service.InstructorRegistration;
+import org.example.model.*;
+import org.example.service.*;
 
 public class Main {
 
     public static void main(String[] args) {
         Scanner hh = new Scanner(System.in);
 
-        StudentRegistration studentRegistration = new StudentRegistration();
-        CourseRegistration courseRegistration = new CourseRegistration();
-        InstructorRegistration instructorRegistration = new InstructorRegistration();
+        // Service Implementations
+        StudentRegistrationImpl studentRegistration = new StudentRegistrationImpl();
+        CourseRegistrationImpl courseRegistration = new CourseRegistrationImpl();
+        InstructorRegistrationImpl instructorRegistration = new InstructorRegistrationImpl();
+        SectionRegistrationImpl sectionRegistration = new SectionRegistrationImpl();
+        DepartmentRegistrationImpl departmentRegistration = new DepartmentRegistrationImpl();
+        TuitionFeePaymentImpl tuitionFeePayment = new TuitionFeePaymentImpl();
+
+        // Facade
+        CampusRegistrar campusRegistrar = new CampusRegistrar(studentRegistration, courseRegistration, sectionRegistration, departmentRegistration,  tuitionFeePayment);
 
         int mainChoice;
 
         System.out.println("=================================");
-        System.out.println("   ENROLLMENT MANAGEMENT SYSTEM");
-        System.out.println("       by: Paul Geneo Ajeda");
+        System.out.println("   ENROLLMENT MANAGEMENT SYSTEM  ");
+        System.out.println("       by: Paul Geneo Ajeda      ");
         System.out.println("=================================");
 
         do {
@@ -30,6 +32,9 @@ public class Main {
             System.out.println("[1] Student Menu");
             System.out.println("[2] Course Menu");
             System.out.println("[3] Instructor Menu");
+            System.out.println("[4] Section Menu");
+            System.out.println("[5] Department Menu");
+            System.out.println("[6] Tuition Fee Menu");
             System.out.println("[0] Exit");
             System.out.print("Enter choice: ");
             mainChoice = hh.nextInt();
@@ -57,54 +62,33 @@ public class Main {
                                 System.out.print("Enter ID: ");
                                 int sid = hh.nextInt();
                                 hh.nextLine();
-
                                 System.out.print("Enter Name: ");
                                 String sname = hh.nextLine();
-
                                 System.out.print("Enter Program: ");
                                 String sprog = hh.nextLine();
-
-                                studentRegistration.addStudent(
-                                        new Student(sid, sname, sprog)
-                                );
+                                campusRegistrar.addStudent(new Student(sid, sname, sprog));
                                 System.out.println("Student added.");
                                 break;
-
                             case 2:
-                                studentRegistration.displayAll();
+                                campusRegistrar.displayAllStudent();
                                 break;
-
                             case 3:
                                 System.out.print("Enter ID to update: ");
                                 sid = hh.nextInt();
                                 hh.nextLine();
-
                                 System.out.print("New Name: ");
                                 sname = hh.nextLine();
-
                                 System.out.print("New Program: ");
                                 sprog = hh.nextLine();
-
-                                System.out.println(
-                                        studentRegistration.updateStudent(
-                                                new Student(sid, sname, sprog)
-                                        )
-                                );
+                                System.out.println(campusRegistrar.updateStudent(new Student(sid, sname, sprog)));
                                 break;
-
                             case 4:
                                 System.out.print("Enter ID to delete: ");
                                 sid = hh.nextInt();
                                 hh.nextLine();
-
-                                System.out.println(
-                                        studentRegistration.delete(
-                                                new Student(sid)
-                                        )
-                                );
+                                System.out.println(campusRegistrar.deleteStudent(new Student(sid)));
                                 break;
                         }
-
                     } while (sChoice != 0);
                     break;
 
@@ -127,52 +111,31 @@ public class Main {
                             case 1:
                                 System.out.print("Enter Course ID: ");
                                 String cid = hh.nextLine();
-
                                 System.out.print("Enter Course Name: ");
                                 String cname = hh.nextLine();
-
                                 System.out.print("Enter Program: ");
                                 String cprog = hh.nextLine();
-
-                                courseRegistration.addCourse(
-                                        new Course(cid, cname, cprog)
-                                );
+                                campusRegistrar.addCourse(new Course(cid, cname, cprog));
                                 System.out.println("Course added.");
                                 break;
-
                             case 2:
-                                courseRegistration.displayAll();
+                                campusRegistrar.displayAllCourse();
                                 break;
-
                             case 3:
                                 System.out.print("Enter Course ID to update: ");
                                 cid = hh.nextLine();
-
                                 System.out.print("New Course Name: ");
                                 cname = hh.nextLine();
-
                                 System.out.print("New Program: ");
                                 cprog = hh.nextLine();
-
-                                System.out.println(
-                                        courseRegistration.updateCourse(
-                                                new Course(cid, cname, cprog)
-                                        )
-                                );
+                                System.out.println(campusRegistrar.updateCourse(new Course(cid, cname, cprog)));
                                 break;
-
                             case 4:
                                 System.out.print("Enter Course ID to delete: ");
                                 cid = hh.nextLine();
-
-                                System.out.println(
-                                        courseRegistration.delete(
-                                                new Course(cid, "", "")
-                                        )
-                                );
+                                System.out.println(campusRegistrar.deleteCourse(new Course(cid, "", "")));
                                 break;
                         }
-
                     } while (cChoice != 0);
                     break;
 
@@ -196,51 +159,170 @@ public class Main {
                                 System.out.print("Enter ID: ");
                                 int iid = hh.nextInt();
                                 hh.nextLine();
-
                                 System.out.print("Enter Name: ");
                                 String iname = hh.nextLine();
-
                                 System.out.print("Enter Course: ");
                                 String course = hh.nextLine();
-
-                                instructorRegistration.saveInstructor(
-                                        new Instructor(iid, iname, course)
-                                );
+                                instructorRegistration.addInstructor(new Instructor(iid, iname, course));
                                 System.out.println("Instructor added.");
                                 break;
-
                             case 2:
-                                instructorRegistration.displayAllInstructor();
+                                instructorRegistration.displayALLInstructor();
                                 break;
-
                             case 3:
                                 System.out.print("Enter ID to update: ");
                                 iid = hh.nextInt();
                                 hh.nextLine();
-
                                 System.out.print("New Name: ");
                                 iname = hh.nextLine();
-
                                 System.out.print("New Course: ");
                                 course = hh.nextLine();
-
                                 System.out.println(instructorRegistration.updateInstructor(new Instructor(iid, iname, course)));
                                 break;
-
                             case 4:
                                 System.out.print("Enter ID to delete: ");
                                 iid = hh.nextInt();
                                 hh.nextLine();
-
-                                System.out.println(
-                                        instructorRegistration.deleteInstructor(
-                                                new Instructor(iid, "", "")
-                                        )
-                                );
+                                System.out.println(instructorRegistration.deleteInstructor(new Instructor(iid, "", "")));
                                 break;
                         }
-
                     } while (iChoice != 0);
+                    break;
+
+                // ================= SECTION MENU =================
+                case 4:
+                    int secChoice;
+                    do {
+                        System.out.println("\nSECTION MENU");
+                        System.out.println("[1] Add Section");
+                        System.out.println("[2] Display Sections");
+                        System.out.println("[3] Update Section");
+                        System.out.println("[4] Delete Section");
+                        System.out.println("[0] Back");
+
+                        System.out.print("Enter choice: ");
+                        secChoice = hh.nextInt();
+                        hh.nextLine();
+
+                        switch (secChoice) {
+                            case 1:
+                                System.out.print("Enter Section ID: ");
+                                int secid = hh.nextInt();
+                                hh.nextLine();
+                                System.out.print("Enter Section Name: ");
+                                String secname = hh.nextLine();
+                                campusRegistrar.addSection(new Section(secid, secname));
+                                System.out.println("Section added.");
+                                break;
+                            case 2:
+                                campusRegistrar.displayAllSections();
+                                break;
+                            case 3:
+                                System.out.print("Enter Section ID to update: ");
+                                secid = hh.nextInt();
+                                hh.nextLine();
+                                System.out.print("New Section Name: ");
+                                secname = hh.nextLine();
+                                System.out.println(campusRegistrar.updateSection(new Section(secid, secname)));
+                                break;
+                            case 4:
+                                System.out.print("Enter Section ID to delete: ");
+                                secid = hh.nextInt();
+                                hh.nextLine();
+                                System.out.println(campusRegistrar.deleteSection(new Section(secid, "")));
+                                break;
+                        }
+                    } while (secChoice != 0);
+                    break;
+
+                // ================= DEPARTMENT MENU =================
+                case 5:
+                    int dChoice;
+                    do {
+                        System.out.println("\nDEPARTMENT MENU");
+                        System.out.println("[1] Add Department");
+                        System.out.println("[2] Display Departments");
+                        System.out.println("[3] Update Department");
+                        System.out.println("[4] Delete Department");
+                        System.out.println("[0] Back");
+                        System.out.print("Enter choice: ");
+                        dChoice = hh.nextInt();
+                        hh.nextLine();
+
+                        switch (dChoice) {
+                            case 1:
+                                System.out.print("Enter Department ID: ");
+                                int did = hh.nextInt();
+                                hh.nextLine();
+                                System.out.print("Enter Department Name: ");
+                                String dname = hh.nextLine();
+                                campusRegistrar.addDepartment(new Department(did, dname));
+                                System.out.println("Department added.");
+                                break;
+                            case 2:
+                                campusRegistrar.displayAllDepartments();
+                                break;
+                            case 3:
+                                System.out.print("Enter Department ID to update: ");
+                                did = hh.nextInt();
+                                hh.nextLine();
+                                System.out.print("New Department Name: ");
+                                dname = hh.nextLine();
+                                System.out.println(campusRegistrar.updateDepartment(new Department(did, dname)));
+                                break;
+                            case 4:
+                                System.out.print("Enter Department ID to delete: ");
+                                did = hh.nextInt();
+                                hh.nextLine();
+                                System.out.println(campusRegistrar.deleteDepartment(new Department(did, "")));
+                                break;
+                        }
+                    } while (dChoice != 0);
+                    break;
+
+                // ================= TUITION FEE MENU =================
+                case 6:
+                    int tChoice;
+                    do {
+                        System.out.println("\nTUITION FEE MENU");
+                        System.out.println("[1] Calculate Fee");
+                        System.out.println("[2] Make Payment");
+                        System.out.println("[3] Check Balance");
+                        System.out.println("[4] Display Payment Info");
+                        System.out.println("[0] Back");
+                        System.out.print("Enter choice: ");
+                        tChoice = hh.nextInt();
+                        hh.nextLine();
+
+                        int tid;
+                        switch (tChoice) {
+                            case 1:
+                                System.out.print("Enter Student ID: ");
+                                tid = hh.nextInt();
+                                System.out.print("Enter Number of Units: ");
+                                int units = hh.nextInt();
+                                campusRegistrar.calculateFee(tid, units);
+                                break;
+                            case 2:
+                                System.out.print("Enter Student ID: ");
+                                tid = hh.nextInt();
+                                System.out.print("Enter Payment Amount: ");
+                                double amount = hh.nextDouble();
+                                System.out.println(campusRegistrar.makePayment(tid, amount));
+                                break;
+                            case 3:
+                                System.out.print("Enter Student ID: ");
+                                tid = hh.nextInt();
+                                double balance = campusRegistrar.getRemainingBalance(tid);
+                                System.out.println("Remaining Balance: " + balance);
+                                break;
+                            case 4:
+                                System.out.print("Enter Student ID: ");
+                                tid = hh.nextInt();
+                                campusRegistrar.displayPaymentInfo(tid);
+                                break;
+                        }
+                    } while (tChoice != 0);
                     break;
 
                 case 0:
@@ -254,135 +336,5 @@ public class Main {
         } while (mainChoice != 0);
 
         hh.close();
-
-        Instructor instructor = new Instructor();
-        System.out.print("Instructor's Main Task: ");
-        instructor.mainTask();
-
-        Student student = new Student();
-        System.out.print("Student's Main Task: ");
-        student.mainTask();
     }
 }
-
-
-/*package org.example;
-import java.util.*;
-
-import org.example.model.Person;
-import org.example.model.Course;
-import org.example.model.Student;
-import org.example.model.Instructor;
-import org.example.service.StudentRegistration;
-import org.example.service.CourseRegistration;
-import org.example.service.InstructorRegistration;
-
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    static String name = "";
-    static String program = "";
-
-    public static void main(String[] args) {
-        Scanner hh = new Scanner(System.in);
-
-        StudentRegistration studentRegistration = new StudentRegistration();
-        CourseRegistration courseRegistration = new CourseRegistration();
-        InstructorRegistration instructorRegistration = new InstructorRegistration();
-
-        int choice;
-        int studID;
-        String studName = "";
-        String program = "";
-
-        do {
-            System.out.println("[0] Exit");
-            System.out.println("[1] Save Student");
-            System.out.println("[2] Display Student");
-            System.out.println("[3] Update Student");
-            System.out.println("[4] Remove Student");
-
-            System.out.println("Enter choice: ");
-            choice = hh.nextInt();
-            hh.nextLine();
-
-            switch (choice) {
-                case 1:
-                    //Create
-                    System.out.print("Enter student ID: ");
-                    studID = hh.nextInt();
-                    hh.nextLine();
-
-                    System.out.print("Enter student name: ");
-                    studName = hh.nextLine();
-
-                    System.out.print("Enter program: ");
-                    program = hh.nextLine();
-
-                    studentRegistration.addStudent(new Student(studID, studName, program));
-                    break;
-
-                case 2:
-                    //Read
-
-                    studentRegistration.displayAll();
-                    break;
-
-                case 3:
-                    //Update
-                    System.out.print("Enter student ID to be updated: ");
-                    studID = hh.nextInt();
-                    hh.nextLine();
-
-                    studentRegistration.updateStudent(new Student(studID));
-                    break;
-
-                case 4:
-                    //Delete
-                    System.out.print("Enter student ID to be removed: ");
-                    studID = hh.nextInt();
-                    hh.nextLine();
-
-                    studentRegistration.delete(new Student(studID));
-                    break;
-
-                default:
-                    System.out.println("Invalid choice");
-                    break;
-            }
-        } while (choice != 0);
-    }
-}
-//    public static void main(String[] args) {
-//        Student student = new Student();
-//        student.setStudentID("000123");
-//        student.setStudentName("John Doe");
-//        student.setProgram("Information Technology");
-//
-//        student.display();
-//
-//        Student student2 = new Student();
-//        student2.setStudentID("000124");
-//        student2.setStudentName("Jane Doe");
-//        student2.setProgram("Information Technology");
-//
-//        student2.display();
-//
-//        Course course = new Course();
-//        course.setCourseID("0001");
-//        course.setCourseName("Integrative Programming");
-//        course.setProgram("Information Technology");
-//
-//        course.display();
-//
-//        Course course2 = new Course();
-//        course2.setCourseID("0001");
-//        course2.setCourseName("Integrative Programming");
-//        course2.setProgram("Information Technology");
-//
-//        course2.display();
-//
-//    }
-//
-
- */

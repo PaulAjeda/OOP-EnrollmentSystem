@@ -1,69 +1,50 @@
 package org.example.model;
 
-public class Student extends Person{
-    private int StudentID;
-    private String studentName;
+public class Student extends Person {
     private String program;
 
-    public Student(){
-        this(0);
+    public Student() {
+        super(0, "Unknown Student");
+        this.program = "Information Technology";
     }
 
-    public Student(int StudentID){
-        this(StudentID, "Unknown");
+    public Student(int ID) {
+        super(ID, "Unknown Student");
+        this.program = "Information Technology";
     }
 
-    public Student(int StudentID, String studentName){
-        this(StudentID, studentName, "Information Technology");
-        }
-
-        public Student(int ID, String name, String program) {
+    public Student(int ID, String name, String program) {
         super(ID, name);
-        this.StudentID = ID;
-        this.studentName = name;
         this.program = program;
     }
 
-    public int getStudentID(){ return StudentID; }
-
-/*    public void setStudentID(String studentID) {
-        this.StudentID = studentID;
-    }
-*/
-    public String getStudentName(){
-        return studentName;
+    public int getStudentID() {
+        return getID();
     }
 
-    public void setName(String name){
-        this.studentName = name;
+    public String getStudentName() {
+        return getName();
     }
 
-    public String getProgram(){
+    public String getProgram() {
         return program;
     }
 
-    public void setProgram(String program){
+    public void setProgram(String program) {
         this.program = program;
     }
 
-    public void display(){
-        System.out.println("\nStudent ID:" + getStudentID());
-        System.out.println("Student Name:" + getStudentName());
-        System.out.println("Program:" + getProgram());
+    @Override
+    public void mainTask() {
+        System.out.println("Attend classes and complete assignments.");
     }
+
     @Override
     public String toString() {
         return "Student{" +
-                "StudentID=" + StudentID +
-                ", studentName='" + studentName + '\'' +
-                ", program='" + program + '\'' +
+                "ID=" + getID() +
+                ", Name='" + getName() + '\'' +
+                ", Program='" + program + '\'' +
                 '}';
     }
-
-    @Override
-    public void mainTask(){
-        System.out.println("I Study");
-    }
 }
-
-
