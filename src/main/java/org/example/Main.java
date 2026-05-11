@@ -14,9 +14,10 @@ public class Main {
         CourseRegistrationImpl courseRegistration = new CourseRegistrationImpl();
         InstructorRegistrationImpl instructorRegistration = new InstructorRegistrationImpl();
         SectionRegistrationImpl sectionRegistration = new SectionRegistrationImpl();
+        DepartmentRegistrationImpl departmentRegistration = new DepartmentRegistrationImpl();
 
         // Facade
-        CampusRegistrar campusRegistrar = new CampusRegistrar(studentRegistration, courseRegistration, sectionRegistration);
+        CampusRegistrar campusRegistrar = new CampusRegistrar(studentRegistration, courseRegistration, sectionRegistration, departmentRegistration);
 
         int mainChoice;
 
@@ -31,6 +32,7 @@ public class Main {
             System.out.println("[2] Course Menu");
             System.out.println("[3] Instructor Menu");
             System.out.println("[4] Section Menu");
+            System.out.println("[5] Department Menu");
             System.out.println("[0] Exit");
             System.out.print("Enter choice: ");
             mainChoice = hh.nextInt();
@@ -229,6 +231,51 @@ public class Main {
                                 break;
                         }
                     } while (secChoice != 0);
+                    break;
+
+                // ================= DEPARTMENT MENU =================
+                case 5:
+                    int dChoice;
+                    do {
+                        System.out.println("\nDEPARTMENT MENU");
+                        System.out.println("[1] Add Department");
+                        System.out.println("[2] Display Departments");
+                        System.out.println("[3] Update Department");
+                        System.out.println("[4] Delete Department");
+                        System.out.println("[0] Back");
+                        System.out.print("Enter choice: ");
+                        dChoice = hh.nextInt();
+                        hh.nextLine();
+
+                        switch (dChoice) {
+                            case 1:
+                                System.out.print("Enter Department ID: ");
+                                int did = hh.nextInt();
+                                hh.nextLine();
+                                System.out.print("Enter Department Name: ");
+                                String dname = hh.nextLine();
+                                campusRegistrar.addDepartment(new Department(did, dname));
+                                System.out.println("Department added.");
+                                break;
+                            case 2:
+                                campusRegistrar.displayAllDepartments();
+                                break;
+                            case 3:
+                                System.out.print("Enter Department ID to update: ");
+                                did = hh.nextInt();
+                                hh.nextLine();
+                                System.out.print("New Department Name: ");
+                                dname = hh.nextLine();
+                                System.out.println(campusRegistrar.updateDepartment(new Department(did, dname)));
+                                break;
+                            case 4:
+                                System.out.print("Enter Department ID to delete: ");
+                                did = hh.nextInt();
+                                hh.nextLine();
+                                System.out.println(campusRegistrar.deleteDepartment(new Department(did, "")));
+                                break;
+                        }
+                    } while (dChoice != 0);
                     break;
 
                 case 0:

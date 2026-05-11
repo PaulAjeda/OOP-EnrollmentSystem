@@ -81,3 +81,17 @@ SectionRegistration
 SectionRegistrationImpl
 
 ![img_19.png](img_19.png)
+
+**[2] Department**
+
+Department
+
+![img_20.png](img_20.png)
+
+DepartmentRegistration
+
+![img_21.png](img_21.png)
+
+DepartmentRegistrationImpl
+
+![img_22.png](img_22.png)
