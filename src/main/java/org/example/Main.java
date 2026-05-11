@@ -5,24 +5,27 @@ import java.util.*;
 import org.example.model.Student;
 import org.example.model.Course;
 import org.example.model.Instructor;
-import org.example.service.StudentRegistration;
-import org.example.service.CourseRegistration;
-import org.example.service.InstructorRegistration;
+import org.example.service.CampusRegistrar;
+import org.example.service.StudentRegistrationImpl;
+import org.example.service.CourseRegistrationImpl;
+import org.example.service.InstructorRegistrationImpl;
 
 public class Main {
 
     public static void main(String[] args) {
         Scanner hh = new Scanner(System.in);
 
-        StudentRegistration studentRegistration = new StudentRegistration();
-        CourseRegistration courseRegistration = new CourseRegistration();
-        InstructorRegistration instructorRegistration = new InstructorRegistration();
+        StudentRegistrationImpl studentRegistration = new StudentRegistrationImpl();
+        CourseRegistrationImpl courseRegistration = new CourseRegistrationImpl();
+        InstructorRegistrationImpl instructorRegistration = new InstructorRegistrationImpl();
+
+        CampusRegistrar campusRegistrar = new CampusRegistrar(studentRegistration, courseRegistration);
 
         int mainChoice;
 
         System.out.println("=================================");
-        System.out.println("   ENROLLMENT MANAGEMENT SYSTEM");
-        System.out.println("       by: Paul Geneo Ajeda");
+        System.out.println("   ENROLLMENT MANAGEMENT SYSTEM  ");
+        System.out.println("       by: Paul Geneo Ajeda      ");
         System.out.println("=================================");
 
         do {
@@ -64,14 +67,14 @@ public class Main {
                                 System.out.print("Enter Program: ");
                                 String sprog = hh.nextLine();
 
-                                studentRegistration.addStudent(
+                                campusRegistrar.addStudent(
                                         new Student(sid, sname, sprog)
                                 );
                                 System.out.println("Student added.");
                                 break;
 
                             case 2:
-                                studentRegistration.displayAll();
+                                campusRegistrar.displayAllStudent();
                                 break;
 
                             case 3:
@@ -86,7 +89,7 @@ public class Main {
                                 sprog = hh.nextLine();
 
                                 System.out.println(
-                                        studentRegistration.updateStudent(
+                                        campusRegistrar.updateStudent(
                                                 new Student(sid, sname, sprog)
                                         )
                                 );
@@ -98,7 +101,7 @@ public class Main {
                                 hh.nextLine();
 
                                 System.out.println(
-                                        studentRegistration.delete(
+                                        campusRegistrar.deleteStudent(
                                                 new Student(sid)
                                         )
                                 );
@@ -134,14 +137,14 @@ public class Main {
                                 System.out.print("Enter Program: ");
                                 String cprog = hh.nextLine();
 
-                                courseRegistration.addCourse(
+                                campusRegistrar.addCourse(
                                         new Course(cid, cname, cprog)
                                 );
                                 System.out.println("Course added.");
                                 break;
 
                             case 2:
-                                courseRegistration.displayAll();
+                                campusRegistrar.displayAllCourse();
                                 break;
 
                             case 3:
@@ -155,7 +158,7 @@ public class Main {
                                 cprog = hh.nextLine();
 
                                 System.out.println(
-                                        courseRegistration.updateCourse(
+                                        campusRegistrar.updateCourse(
                                                 new Course(cid, cname, cprog)
                                         )
                                 );
@@ -166,7 +169,7 @@ public class Main {
                                 cid = hh.nextLine();
 
                                 System.out.println(
-                                        courseRegistration.delete(
+                                        campusRegistrar.deleteCourse(
                                                 new Course(cid, "", "")
                                         )
                                 );
@@ -203,14 +206,14 @@ public class Main {
                                 System.out.print("Enter Course: ");
                                 String course = hh.nextLine();
 
-                                instructorRegistration.saveInstructor(
+                                instructorRegistration.addInstructor(
                                         new Instructor(iid, iname, course)
                                 );
                                 System.out.println("Instructor added.");
                                 break;
 
                             case 2:
-                                instructorRegistration.displayAllInstructor();
+                                instructorRegistration.displayALLInstructor();
                                 break;
 
                             case 3:
@@ -255,13 +258,6 @@ public class Main {
 
         hh.close();
 
-        Instructor instructor = new Instructor();
-        System.out.print("Instructor's Main Task: ");
-        instructor.mainTask();
-
-        Student student = new Student();
-        System.out.print("Student's Main Task: ");
-        student.mainTask();
     }
 }
 
@@ -352,6 +348,13 @@ public class Main {
             }
         } while (choice != 0);
     }
+      Instructor instructor = new Instructor();
+        System.out.print("Instructor's Main Task: ");
+        instructor.mainTask();
+
+        Student student = new Student();
+        System.out.print("Student's Main Task: ");
+        student.mainTask();
 }
 //    public static void main(String[] args) {
 //        Student student = new Student();
