@@ -3,6 +3,7 @@ package org.example;
 import java.util.*;
 import org.example.model.*;
 import org.example.service.*;
+import org.example.exception.EnrollmentException;
 
 public class Main {
 
@@ -66,37 +67,41 @@ public class Main {
                         sChoice = hh.nextInt();
                         hh.nextLine();
 
-                        switch (sChoice) {
-                            case 1:
-                                System.out.print("Enter ID: ");
-                                int sid = hh.nextInt();
-                                hh.nextLine();
-                                System.out.print("Enter Name: ");
-                                String sname = hh.nextLine();
-                                System.out.print("Enter Program: ");
-                                String sprog = hh.nextLine();
-                                campusRegistrar.addStudent(new Student(sid, sname, sprog));
-                                System.out.println("Student added.");
-                                break;
-                            case 2:
-                                campusRegistrar.displayAllStudent();
-                                break;
-                            case 3:
-                                System.out.print("Enter ID to update: ");
-                                sid = hh.nextInt();
-                                hh.nextLine();
-                                System.out.print("New Name: ");
-                                sname = hh.nextLine();
-                                System.out.print("New Program: ");
-                                sprog = hh.nextLine();
-                                System.out.println(campusRegistrar.updateStudent(new Student(sid, sname, sprog)));
-                                break;
-                            case 4:
-                                System.out.print("Enter ID to remove: ");
-                                sid = hh.nextInt();
-                                hh.nextLine();
-                                System.out.println(campusRegistrar.removeStudent(new Student(sid)));
-                                break;
+                        try {
+                            switch (sChoice) {
+                                case 1:
+                                    System.out.print("Enter ID: ");
+                                    int sid = hh.nextInt(); hh.nextLine();
+                                    System.out.print("Enter Name: ");
+                                    String sname = hh.nextLine();
+                                    System.out.print("Enter Program: ");
+                                    String sprog = hh.nextLine();
+                                    campusRegistrar.addStudent(new Student(sid, sname, sprog));
+                                    System.out.println("Student added.");
+                                    break;
+                                case 2:
+                                    campusRegistrar.displayAllStudent();
+                                    break;
+                                case 3:
+                                    System.out.print("Enter ID to update: ");
+                                    sid = hh.nextInt(); hh.nextLine();
+                                    System.out.print("New Name: ");
+                                    sname = hh.nextLine();
+                                    System.out.print("New Program: ");
+                                    sprog = hh.nextLine();
+                                    System.out.println(campusRegistrar.updateStudent(new Student(sid, sname, sprog)));
+                                    break;
+                                case 4:
+                                    System.out.print("Enter ID to remove: ");
+                                    sid = hh.nextInt(); hh.nextLine();
+                                    System.out.println(campusRegistrar.removeStudent(new Student(sid)));
+                                    break;
+                            }
+                        } catch (EnrollmentException e) {
+                            System.out.println("[ERROR] " + e.getMessage());
+                        } catch (Exception e) {
+                            System.out.println("[CRITICAL ERROR] Invalid input format.");
+                            hh.nextLine(); // Clear buffer
                         }
                     } while (sChoice != 0);
                     break;
@@ -115,34 +120,41 @@ public class Main {
                         cChoice = hh.nextInt();
                         hh.nextLine();
 
-                        switch (cChoice) {
-                            case 1:
-                                System.out.print("Enter Course ID: ");
-                                String cid = hh.nextLine();
-                                System.out.print("Enter Course Name: ");
-                                String cname = hh.nextLine();
-                                System.out.print("Enter Program: ");
-                                String cprog = hh.nextLine();
-                                campusRegistrar.addCourse(new Course(cid, cname, cprog));
-                                System.out.println("Course added.");
-                                break;
-                            case 2:
-                                campusRegistrar.displayAllCourse();
-                                break;
-                            case 3:
-                                System.out.print("Enter Course ID to update: ");
-                                cid = hh.nextLine();
-                                System.out.print("New Course Name: ");
-                                cname = hh.nextLine();
-                                System.out.print("New Program: ");
-                                cprog = hh.nextLine();
-                                System.out.println(campusRegistrar.updateCourse(new Course(cid, cname, cprog)));
-                                break;
-                            case 4:
-                                System.out.print("Enter Course ID to remove: ");
-                                cid = hh.nextLine();
-                                System.out.println(campusRegistrar.removeCourse(new Course(cid, "", "")));
-                                break;
+                        try {
+                            switch (cChoice) {
+                                case 1:
+                                    System.out.print("Enter Course ID: ");
+                                    String cid = hh.nextLine();
+                                    System.out.print("Enter Course Name: ");
+                                    String cname = hh.nextLine();
+                                    System.out.print("Enter Program: ");
+                                    String cprog = hh.nextLine();
+                                    campusRegistrar.addCourse(new Course(cid, cname, cprog));
+                                    System.out.println("Course added.");
+                                    break;
+                                case 2:
+                                    campusRegistrar.displayAllCourse();
+                                    break;
+                                case 3:
+                                    System.out.print("Enter Course ID to update: ");
+                                    cid = hh.nextLine();
+                                    System.out.print("New Course Name: ");
+                                    cname = hh.nextLine();
+                                    System.out.print("New Program: ");
+                                    cprog = hh.nextLine();
+                                    System.out.println(campusRegistrar.updateCourse(new Course(cid, cname, cprog)));
+                                    break;
+                                case 4:
+                                    System.out.print("Enter Course ID to remove: ");
+                                    cid = hh.nextLine();
+                                    System.out.println(campusRegistrar.removeCourse(new Course(cid, "", "")));
+                                    break;
+                            }
+                        } catch (EnrollmentException e) {
+                            System.out.println("[ERROR] " + e.getMessage());
+                        } catch (Exception e) {
+                            System.out.println("[CRITICAL ERROR] Invalid input format.");
+                            hh.nextLine();
                         }
                     } while (cChoice != 0);
                     break;
@@ -161,37 +173,41 @@ public class Main {
                         iChoice = hh.nextInt();
                         hh.nextLine();
 
-                        switch (iChoice) {
-                            case 1:
-                                System.out.print("Enter ID: ");
-                                int iid = hh.nextInt();
-                                hh.nextLine();
-                                System.out.print("Enter Name: ");
-                                String iname = hh.nextLine();
-                                System.out.print("Enter Course: ");
-                                String course = hh.nextLine();
-                                instructorService.addInstructor(new Instructor(iid, iname, course));
-                                System.out.println("Instructor added.");
-                                break;
-                            case 2:
-                                instructorService.displayALLInstructor();
-                                break;
-                            case 3:
-                                System.out.print("Enter ID to update: ");
-                                iid = hh.nextInt();
-                                hh.nextLine();
-                                System.out.print("New Name: ");
-                                iname = hh.nextLine();
-                                System.out.print("New Course: ");
-                                course = hh.nextLine();
-                                System.out.println(instructorService.updateInstructor(new Instructor(iid, iname, course)));
-                                break;
-                            case 4:
-                                System.out.print("Enter ID to delete: ");
-                                iid = hh.nextInt();
-                                hh.nextLine();
-                                System.out.println(instructorService.deleteInstructor(new Instructor(iid, "", "")));
-                                break;
+                        try {
+                            switch (iChoice) {
+                                case 1:
+                                    System.out.print("Enter ID: ");
+                                    int iid = hh.nextInt(); hh.nextLine();
+                                    System.out.print("Enter Name: ");
+                                    String iname = hh.nextLine();
+                                    System.out.print("Enter Course: ");
+                                    String course = hh.nextLine();
+                                    instructorService.addInstructor(new Instructor(iid, iname, course));
+                                    System.out.println("Instructor added.");
+                                    break;
+                                case 2:
+                                    instructorService.displayALLInstructor();
+                                    break;
+                                case 3:
+                                    System.out.print("Enter ID to update: ");
+                                    iid = hh.nextInt(); hh.nextLine();
+                                    System.out.print("New Name: ");
+                                    iname = hh.nextLine();
+                                    System.out.print("New Course: ");
+                                    course = hh.nextLine();
+                                    System.out.println(instructorService.updateInstructor(new Instructor(iid, iname, course)));
+                                    break;
+                                case 4:
+                                    System.out.print("Enter ID to delete: ");
+                                    iid = hh.nextInt(); hh.nextLine();
+                                    System.out.println(instructorService.deleteInstructor(new Instructor(iid, "", "")));
+                                    break;
+                            }
+                        } catch (EnrollmentException e) {
+                            System.out.println("[ERROR] " + e.getMessage());
+                        } catch (Exception e) {
+                            System.out.println("[CRITICAL ERROR] Invalid input format.");
+                            hh.nextLine();
                         }
                     } while (iChoice != 0);
                     break;
@@ -210,45 +226,49 @@ public class Main {
                         secChoice = hh.nextInt();
                         hh.nextLine();
 
-                        switch (secChoice) {
-                            case 1:
-                                System.out.print("Enter Section ID: ");
-                                int secid = hh.nextInt();
-                                hh.nextLine();
-                                System.out.print("Enter Section Name: ");
-                                String secname = hh.nextLine();
-                                System.out.print("Enter Max Capacity: ");
-                                int cap = hh.nextInt();
-                                System.out.print("Enter Department ID: ");
-                                int sdeptid = hh.nextInt();
-                                Section newSec = new Section(secid, secname, cap);
-                                newSec.setDepartmentID(sdeptid);
-                                campusRegistrar.addSection(newSec);
-                                System.out.println("Section added.");
-                                break;
-                            case 2:
-                                campusRegistrar.displayAllSections();
-                                break;
-                            case 3:
-                                System.out.print("Enter Section ID to update: ");
-                                secid = hh.nextInt();
-                                hh.nextLine();
-                                System.out.print("New Section Name: ");
-                                secname = hh.nextLine();
-                                System.out.print("New Max Capacity: ");
-                                cap = hh.nextInt();
-                                System.out.print("New Department ID: ");
-                                sdeptid = hh.nextInt();
-                                Section s = new Section(secid, secname, cap);
-                                s.setDepartmentID(sdeptid);
-                                System.out.println(campusRegistrar.updateSection(s));
-                                break;
-                            case 4:
-                                System.out.print("Enter Section ID to delete: ");
-                                secid = hh.nextInt();
-                                hh.nextLine();
-                                System.out.println(campusRegistrar.deleteSection(new Section(secid, "")));
-                                break;
+                        try {
+                            switch (secChoice) {
+                                case 1:
+                                    System.out.print("Enter Section ID: ");
+                                    int secid = hh.nextInt(); hh.nextLine();
+                                    System.out.print("Enter Section Name: ");
+                                    String secname = hh.nextLine();
+                                    System.out.print("Enter Max Capacity: ");
+                                    int cap = hh.nextInt();
+                                    System.out.print("Enter Department ID: ");
+                                    int sdeptid = hh.nextInt();
+                                    Section newSec = new Section(secid, secname, cap);
+                                    newSec.setDepartmentID(sdeptid);
+                                    campusRegistrar.addSection(newSec);
+                                    System.out.println("Section added.");
+                                    break;
+                                case 2:
+                                    campusRegistrar.displayAllSections();
+                                    break;
+                                case 3:
+                                    System.out.print("Enter Section ID to update: ");
+                                    secid = hh.nextInt(); hh.nextLine();
+                                    System.out.print("New Section Name: ");
+                                    secname = hh.nextLine();
+                                    System.out.print("New Max Capacity: ");
+                                    cap = hh.nextInt();
+                                    System.out.print("New Department ID: ");
+                                    sdeptid = hh.nextInt();
+                                    Section s = new Section(secid, secname, cap);
+                                    s.setDepartmentID(sdeptid);
+                                    System.out.println(campusRegistrar.updateSection(s));
+                                    break;
+                                case 4:
+                                    System.out.print("Enter Section ID to delete: ");
+                                    secid = hh.nextInt(); hh.nextLine();
+                                    System.out.println(campusRegistrar.deleteSection(new Section(secid, "")));
+                                    break;
+                            }
+                        } catch (EnrollmentException e) {
+                            System.out.println("[ERROR] " + e.getMessage());
+                        } catch (Exception e) {
+                            System.out.println("[CRITICAL ERROR] Invalid input format.");
+                            hh.nextLine();
                         }
                     } while (secChoice != 0);
                     break;
@@ -267,33 +287,37 @@ public class Main {
                         dChoice = hh.nextInt();
                         hh.nextLine();
 
-                        switch (dChoice) {
-                            case 1:
-                                System.out.print("Enter Department ID: ");
-                                int did = hh.nextInt();
-                                hh.nextLine();
-                                System.out.print("Enter Department Name: ");
-                                String dname = hh.nextLine();
-                                campusRegistrar.addDepartment(new Department(did, dname));
-                                System.out.println("Department added.");
-                                break;
-                            case 2:
-                                campusRegistrar.displayAllDepartments();
-                                break;
-                            case 3:
-                                System.out.print("Enter Department ID to update: ");
-                                did = hh.nextInt();
-                                hh.nextLine();
-                                System.out.print("New Department Name: ");
-                                dname = hh.nextLine();
-                                System.out.println(campusRegistrar.updateDepartment(new Department(did, dname)));
-                                break;
-                            case 4:
-                                System.out.print("Enter Department ID to delete: ");
-                                did = hh.nextInt();
-                                hh.nextLine();
-                                System.out.println(campusRegistrar.deleteDepartment(new Department(did, "")));
-                                break;
+                        try {
+                            switch (dChoice) {
+                                case 1:
+                                    System.out.print("Enter Department ID: ");
+                                    int did = hh.nextInt(); hh.nextLine();
+                                    System.out.print("Enter Department Name: ");
+                                    String dname = hh.nextLine();
+                                    campusRegistrar.addDepartment(new Department(did, dname));
+                                    System.out.println("Department added.");
+                                    break;
+                                case 2:
+                                    campusRegistrar.displayAllDepartments();
+                                    break;
+                                case 3:
+                                    System.out.print("Enter Department ID to update: ");
+                                    did = hh.nextInt(); hh.nextLine();
+                                    System.out.print("New Department Name: ");
+                                    dname = hh.nextLine();
+                                    System.out.println(campusRegistrar.updateDepartment(new Department(did, dname)));
+                                    break;
+                                case 4:
+                                    System.out.print("Enter Department ID to delete: ");
+                                    did = hh.nextInt(); hh.nextLine();
+                                    System.out.println(campusRegistrar.deleteDepartment(new Department(did, "")));
+                                    break;
+                            }
+                        } catch (EnrollmentException e) {
+                            System.out.println("[ERROR] " + e.getMessage());
+                        } catch (Exception e) {
+                            System.out.println("[CRITICAL ERROR] Invalid input format.");
+                            hh.nextLine();
                         }
                     } while (dChoice != 0);
                     break;
@@ -312,33 +336,40 @@ public class Main {
                         tChoice = hh.nextInt();
                         hh.nextLine();
 
-                        int tid;
-                        switch (tChoice) {
-                            case 1:
-                                System.out.print("Enter Student ID: ");
-                                tid = hh.nextInt();
-                                System.out.print("Enter Number of Units: ");
-                                int units = hh.nextInt();
-                                campusRegistrar.calculateFee(tid, units);
-                                break;
-                            case 2:
-                                System.out.print("Enter Student ID: ");
-                                tid = hh.nextInt();
-                                System.out.print("Enter Payment Amount: ");
-                                double amount = hh.nextDouble();
-                                System.out.println(campusRegistrar.makePayment(tid, amount));
-                                break;
-                            case 3:
-                                System.out.print("Enter Student ID: ");
-                                tid = hh.nextInt();
-                                double balance = campusRegistrar.getRemainingBalance(tid);
-                                System.out.println("Remaining Balance: " + balance);
-                                break;
-                            case 4:
-                                System.out.print("Enter Student ID: ");
-                                tid = hh.nextInt();
-                                campusRegistrar.displayPaymentInfo(tid);
-                                break;
+                        try {
+                            int tid;
+                            switch (tChoice) {
+                                case 1:
+                                    System.out.print("Enter Student ID: ");
+                                    tid = hh.nextInt();
+                                    System.out.print("Enter Number of Units: ");
+                                    int units = hh.nextInt();
+                                    campusRegistrar.calculateFee(tid, units);
+                                    break;
+                                case 2:
+                                    System.out.print("Enter Student ID: ");
+                                    tid = hh.nextInt();
+                                    System.out.print("Enter Payment Amount: ");
+                                    double amount = hh.nextDouble();
+                                    System.out.println(campusRegistrar.makePayment(tid, amount));
+                                    break;
+                                case 3:
+                                    System.out.print("Enter Student ID: ");
+                                    tid = hh.nextInt();
+                                    double balance = campusRegistrar.getRemainingBalance(tid);
+                                    System.out.println("Remaining Balance: " + balance);
+                                    break;
+                                case 4:
+                                    System.out.print("Enter Student ID: ");
+                                    tid = hh.nextInt();
+                                    campusRegistrar.displayPaymentInfo(tid);
+                                    break;
+                            }
+                        } catch (EnrollmentException e) {
+                            System.out.println("[ERROR] " + e.getMessage());
+                        } catch (Exception e) {
+                            System.out.println("[CRITICAL ERROR] Invalid input format.");
+                            hh.nextLine();
                         }
                     } while (tChoice != 0);
                     break;
@@ -356,55 +387,53 @@ public class Main {
                         eChoice = hh.nextInt();
                         hh.nextLine();
 
-                        switch (eChoice) {
-                            case 1:
-                                System.out.print("Enter Student ID: ");
-                                int esid = hh.nextInt();
-                                System.out.print("Enter Section ID: ");
-                                int esecid = hh.nextInt();
+                        try {
+                            switch (eChoice) {
+                                case 1:
+                                    System.out.print("Enter Student ID: ");
+                                    int esid = hh.nextInt();
+                                    System.out.print("Enter Section ID: ");
+                                    int esecid = hh.nextInt();
 
-                                // Lookup student and section from real lists
-                                Student targetStudent = null;
-                                for (Student stu : campusRegistrar.getAllStudents()) {
-                                    if (stu.getStudentID() == esid) { targetStudent = stu; break; }
-                                }
-                                Section targetSection = null;
-                                for (Section sec : campusRegistrar.getAllSections()) {
-                                    if (sec.getSectionID() == esecid) { targetSection = sec; break; }
-                                }
+                                    Student targetStudent = null;
+                                    for (Student stu : campusRegistrar.getAllStudents()) {
+                                        if (stu.getStudentID() == esid) { targetStudent = stu; break; }
+                                    }
+                                    Section targetSection = null;
+                                    for (Section sec : campusRegistrar.getAllSections()) {
+                                        if (sec.getSectionID() == esecid) { targetSection = sec; break; }
+                                    }
 
-                                if (targetStudent != null && targetSection != null) {
                                     System.out.println(campusRegistrar.enrollStudentInSection(targetStudent, targetSection));
-                                } else {
-                                    System.out.println("Error: Student or Section not found.");
-                                }
-                                break;
+                                    break;
 
-                            case 2:
-                                System.out.print("Enter Instructor ID: ");
-                                int insid = hh.nextInt();
-                                System.out.print("Enter Section ID: ");
-                                int isecid = hh.nextInt();
+                                case 2:
+                                    System.out.print("Enter Instructor ID: ");
+                                    int insid = hh.nextInt();
+                                    System.out.print("Enter Section ID: ");
+                                    int isecid = hh.nextInt();
 
-                                Instructor targetIns = null;
-                                for (Instructor ins : instructorService.getAllInstructors()) {
-                                    if (ins.getID() == insid) { targetIns = ins; break; }
-                                }
-                                Section targetSec2 = null;
-                                for (Section sec : campusRegistrar.getAllSections()) {
-                                    if (sec.getSectionID() == isecid) { targetSec2 = sec; break; }
-                                }
+                                    Instructor targetIns = null;
+                                    for (Instructor ins : instructorService.getAllInstructors()) {
+                                        if (ins.getID() == insid) { targetIns = ins; break; }
+                                    }
+                                    Section targetSec2 = null;
+                                    for (Section sec : campusRegistrar.getAllSections()) {
+                                        if (sec.getSectionID() == isecid) { targetSec2 = sec; break; }
+                                    }
 
-                                if (targetIns != null && targetSec2 != null) {
                                     System.out.println(campusRegistrar.assignInstructorToSection(targetIns, targetSec2));
-                                } else {
-                                    System.out.println("Error: Instructor or Section not found.");
-                                }
-                                break;
+                                    break;
 
-                            case 3:
-                                campusRegistrar.viewDepartmentHierarchy();
-                                break;
+                                case 3:
+                                    campusRegistrar.viewDepartmentHierarchy();
+                                    break;
+                            }
+                        } catch (EnrollmentException e) {
+                            System.out.println("[ERROR] " + e.getMessage());
+                        } catch (Exception e) {
+                            System.out.println("[CRITICAL ERROR] Invalid input format.");
+                            hh.nextLine();
                         }
                     } while (eChoice != 0);
                     break;

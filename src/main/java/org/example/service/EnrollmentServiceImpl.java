@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.model.*;
+import org.example.exception.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,15 +11,18 @@ public class EnrollmentServiceImpl implements IEnrollmentService {
     private Map<Integer, List<Integer>> sectionEnrollments = new HashMap<>();
 
     @Override
-    public String enrollStudentInSection(Student student, Section section) {
+    public String enrollStudentInSection(Student student, Section section) throws EnrollmentException {
+        if (student == null) throw new RecordNotFoundException("Enrollment Error: Student not found.");
+        if (section == null) throw new RecordNotFoundException("Enrollment Error: Section not found.");
+
         List<Integer> students = sectionEnrollments.computeIfAbsent(section.getSectionID(), k -> new ArrayList<>());
 
         if (students.size() >= section.getMaxCapacity()) {
-            return "Enrollment failed: Section " + section.getSectionName() + " is at full capacity (" + section.getMaxCapacity() + ").";
+            throw new CapacityExceededException("Enrollment failed: Section " + section.getSectionName() + " is at full capacity (" + section.getMaxCapacity() + ").");
         }
 
         if (students.contains(student.getStudentID())) {
-            return "Student " + student.getStudentName() + " is already enrolled in Section " + section.getSectionName();
+            throw new DuplicateEntryException("Student " + student.getStudentName() + " is already enrolled in Section " + section.getSectionName());
         }
 
         students.add(student.getStudentID());
@@ -43,11 +47,9 @@ public class EnrollmentServiceImpl implements IEnrollmentService {
                     hasSections = true;
                     System.out.println("  └── Section: " + sec.getSectionName() + " (ID: " + sec.getSectionID() + ")");
 
-                    // Instructor
                     String instName = (sec.getAssignedInstructor() != null) ? sec.getAssignedInstructor().getName() : "None Assigned";
                     System.out.println("      ├── Instructor: " + instName);
 
-                    // Students
                     System.out.println("      └── Enrolled Students:");
                     List<Integer> studentIDs = sectionEnrollments.get(sec.getSectionID());
                     if (studentIDs == null || studentIDs.isEmpty()) {
