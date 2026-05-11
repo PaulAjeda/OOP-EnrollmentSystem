@@ -13,9 +13,9 @@ public class CampusRegistrar {
     private IEnrollmentService enrollmentService;
     private IInstructorService instructorService;
 
-    public CampusRegistrar(IStudentService studentService,
-                           ICourseService courseService,
-                           ISectionService sectionService,
+    public CampusRegistrar(IStudentService studentService, 
+                           ICourseService courseService, 
+                           ISectionService sectionService, 
                            IDepartmentService departmentService,
                            ITuitionService tuitionService,
                            IEnrollmentService enrollmentService,
@@ -65,16 +65,16 @@ public class CampusRegistrar {
 
     // Enrollment operations
     public String enrollStudentInSection(Student student, Section section) throws EnrollmentException { return enrollmentService.enrollStudentInSection(student, section); }
-    public void viewDepartmentHierarchy() {
+    public void viewDepartmentHierarchy() { 
         enrollmentService.viewDepartmentHierarchy(
-                departmentService.getAllDepartments(),
-                sectionService.getAllSections(),
-                studentService.getAllStudents()
-        );
+            departmentService.getAllDepartments(), 
+            sectionService.getAllSections(), 
+            studentService.getAllStudents()
+        ); 
     }
 
     // Instructor operations
-    public String assignInstructorToSection(Instructor instructor, Section section) throws EnrollmentException {
-        return instructorService.assignInstructorToSection(instructor, section);
+    public String assignInstructorToSection(Instructor instructor, Section section) throws EnrollmentException { 
+        return instructorService.assignInstructorToSection(instructor, section); 
     }
 }

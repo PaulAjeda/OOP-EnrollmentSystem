@@ -21,15 +21,15 @@ public class Main {
 
         // Facade for management
         CampusRegistrar campusRegistrar = new CampusRegistrar(
-                studentService,
-                courseService,
-                sectionService,
-                departmentService,
-                tuitionService,
-                enrollmentService,
-                instructorService
+            studentService, 
+            courseService, 
+            sectionService, 
+            departmentService,
+            tuitionService,
+            enrollmentService,
+            instructorService
         );
-
+        
         int mainChoice;
 
         System.out.println("=================================");
@@ -394,7 +394,7 @@ public class Main {
                                     int esid = hh.nextInt();
                                     System.out.print("Enter Section ID: ");
                                     int esecid = hh.nextInt();
-
+                                    
                                     Student targetStudent = null;
                                     for (Student stu : campusRegistrar.getAllStudents()) {
                                         if (stu.getStudentID() == esid) { targetStudent = stu; break; }
@@ -403,16 +403,16 @@ public class Main {
                                     for (Section sec : campusRegistrar.getAllSections()) {
                                         if (sec.getSectionID() == esecid) { targetSection = sec; break; }
                                     }
-
+                                    
                                     System.out.println(campusRegistrar.enrollStudentInSection(targetStudent, targetSection));
                                     break;
-
+                                    
                                 case 2:
                                     System.out.print("Enter Instructor ID: ");
                                     int insid = hh.nextInt();
                                     System.out.print("Enter Section ID: ");
                                     int isecid = hh.nextInt();
-
+                                    
                                     Instructor targetIns = null;
                                     for (Instructor ins : instructorService.getAllInstructors()) {
                                         if (ins.getID() == insid) { targetIns = ins; break; }
@@ -421,10 +421,10 @@ public class Main {
                                     for (Section sec : campusRegistrar.getAllSections()) {
                                         if (sec.getSectionID() == isecid) { targetSec2 = sec; break; }
                                     }
-
+                                    
                                     System.out.println(campusRegistrar.assignInstructorToSection(targetIns, targetSec2));
                                     break;
-
+                                    
                                 case 3:
                                     campusRegistrar.viewDepartmentHierarchy();
                                     break;

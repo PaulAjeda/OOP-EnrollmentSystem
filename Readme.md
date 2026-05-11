@@ -152,3 +152,15 @@ Critical Validation
 ![img_35.png](img_35.png)
 ![img_36.png](img_36.png)
 ![img_37.png](img_37.png)
+
+**Phase 4: Bonus Automated Testing**
+
+The system includes **JUnit 5 Unit Tests** to prove business logic works correctly:
+- Capacity limit validation (Throws Exception if full).
+- Accurate tuition calculation (Units * 500).
+- Duplicate Student ID prevention.
+- Payment balance tracking.
+- Instructor-to-section assignment.
+
+![img_38.png](img_38.png)
+
