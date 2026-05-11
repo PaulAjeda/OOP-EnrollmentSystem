@@ -1,166 +1,87 @@
-# Ajeda_00P_EnrollmentSystem
+# Enrollment Management System
+**Author:** Paul Geneo Ajeda
 
 ---
-**Author**: Paul Geneo Ajeda
 
+##  Project Overview
+The Enrollment Management System is a Java project that uses Object-Oriented Programming (OOP) principles to manage manages students, courses, sections, and tuition payments using a structured and organized design with interfaces and service classes. It applies proper validation, basic business rules, and GitHub version control to simulate a real-world enrollment system.
 
-**1. Encapsulation**
+---
 
-Image:
+## 1. Data Encapsulation
+The system ensures data integrity by utilizing private attributes and public getters and setters to control all state modifications.
 
-![Ajeda_Screenshot 2026-02-07 110509.png](src/main/resources/Images/Ajeda_Screenshot%202026-02-07%20110509.png)
+![Encapsulation Screenshot](src/main/resources/Images/Ajeda_Screenshot%202026-02-07%20110509.png)
 
-**2. Service Layer**
+---
 
-**3. Inheritance**
+## 2. Service Layer Architecture
+Business logic is separated into a dedicated service layer to decouple operational actions from data entities.
 
-Person:
+---
+
+## 3. Inheritance
+A hierarchical relationship is established where Student and Instructor classes inherit shared attributes from a base Person class.
+
+**Base Class (Person):**
 ![img_1.png](img_1.png)
 
-Instructor:
-![img_2.png](img_2.png)
+**Subclasses:**
+![img_2.png](img_2.png) ![img_3.png](img_3.png)
 
-Student:
-![img_3.png](img_3.png)
+---
 
-**4. Abstraction**
+## 4. Abstraction
+The Person class is defined as an abstract template to enforce consistent polymorphic behavior across all specialized subclasses.
 
-Main:
+![img_5.png](img_5.png) ![img_4.png](img_4.png)
+![img_8.png](img_8.png) ![img_7.png](img_7.png) ![img_9.png](img_9.png)
 
-![img_5.png](img_5.png)
+---
 
-![img_4.png](img_4.png)
-
-Person:
-
-![img_8.png](img_8.png)
-
-
-Student: 
-
-![img_7.png](img_7.png)
-
-Instructor:
-
-![img_9.png](img_9.png)
-
-**5. Interface**
-
-Campus Registrar:
+## 5. Interface-
+All business operations are defined through Java Interfaces to create a modular, contract-based architecture.
 
 ![img_10.png](img_10.png)
+![img_11.png](img_11.png) ![img_12.png](img_12.png)
+![img_13.png](img_13.png) ![img_14.png](img_14.png)
+![img_15.png](img_15.png) ![img_16.png](img_16.png)
 
-Student:
+---
 
-![img_11.png](img_11.png)
-![img_12.png](img_12.png)
+## 6. Extended Entities
+The system includes specialized modules for Section, Department, and Tuition management to simulate a comprehensive university structure.
 
-Course: 
+### [1] Section Management
+![img_17.png](img_17.png) ![img_18.png](img_18.png) ![img_19.png](img_19.png)
 
-![img_13.png](img_13.png)
-![img_14.png](img_14.png)
+### [2] Department Management
+![img_20.png](img_20.png) ![img_21.png](img_21.png) ![img_22.png](img_22.png)
 
-Instructor:
+### [3] Tuition Fee Management
+![img_23.png](img_23.png) ![img_24.png](img_24.png)
 
-![img_15.png](img_15.png)
-![img_16.png](img_16.png)
+---
 
+## 7. Phase 1: Architectural Shift
+The codebase was refactored to strictly separate data models from service implementations using formal interface contracts.
 
-**6. Added Entities**
+![img_25.png](img_25.png) ![img_26.png](img_26.png) ![img_27.png](img_27.png)
+![img_28.png](img_28.png) ![img_29.png](img_29.png) ![img_30.png](img_30.png)
 
-**[1] Section**
+---
 
-Section
+## 8. Phase 2: Minimum Coding Requirements including Advance Input Validation
+The system supports institutional hierarchy traversal and enforces strict section capacity limits through custom exception handling.
 
-![img_17.png](img_17.png)
+![img_31.png](img_31.png) ![img_32.png](img_32.png) ![img_33.png](img_33.png)
+![img_34.png](img_34.png) ![img_35.png](img_35.png) ![img_36.png](img_36.png) ![img_37.png](img_37.png)
 
-SectionRegistration
+---
 
-![img_18.png](img_18.png)
+## 9. Phase 4: Unit Testing (JUnit 5)
+Automated unit tests were implemented to verify the accuracy of tuition calculations and the integrity of capacity validation logic.
 
-SectionRegistrationImpl
+![img_39.png](img_39.png)
 
-![img_19.png](img_19.png)
-
-**[2] Department**
-
-Department
-
-![img_20.png](img_20.png)
-
-DepartmentRegistration
-
-![img_21.png](img_21.png)
-
-DepartmentRegistrationImpl
-
-![img_22.png](img_22.png)
-
-**[3] TuitionFeePayment**
-
-TuitionPayment
-
-![img_23.png](img_23.png)
-
-TuitionFeePayment
-
-![img_24.png](img_24.png)
-
-TuitionFeePaymentImpl
-
-**7. Phase 1: The Architectural Shift**
-
-NewEntity-Enrollment
-
----Interfaces Contracts---
-
-IStudentService:
-
-![img_25.png](img_25.png)
-
-IInstructorService:
-
-![img_26.png](img_26.png)
-
-ICourseService: 
-
-![img_27.png](img_27.png)
-
-ITuitionService
-
-![img_28.png](img_28.png)
-
-IEnrollmentService:
-
-![img_29.png](img_29.png)
-
-NewEntity-Enrollment Added
-
-![img_30.png](img_30.png)
-
-**Phase 2: Minimum Coding Requirements**
-
-Institutional Hierarchy Viewing
-
-![img_31.png](img_31.png)
-
-Critical Validation
-
-![img_32.png](img_32.png)
-![img_33.png](img_33.png)
-![img_34.png](img_34.png)
-![img_35.png](img_35.png)
-![img_36.png](img_36.png)
-![img_37.png](img_37.png)
-
-**Phase 4: Bonus Automated Testing**
-
-The system includes **JUnit 5 Unit Tests** to prove business logic works correctly:
-- Capacity limit validation (Throws Exception if full).
-- Accurate tuition calculation (Units * 500).
-- Duplicate Student ID prevention.
-- Payment balance tracking.
-- Instructor-to-section assignment.
-
-![img_38.png](img_38.png)
-
+---
