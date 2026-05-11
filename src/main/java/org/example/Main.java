@@ -16,14 +16,16 @@ public class Main {
         ISectionService sectionService = new SectionServiceImpl();
         IDepartmentService departmentService = new DepartmentServiceImpl();
         ITuitionService tuitionService = new TuitionServiceImpl();
+        IEnrollmentService enrollmentService = new EnrollmentServiceImpl();
 
-
+        // Facade for management
         CampusRegistrar campusRegistrar = new CampusRegistrar(
                 studentService,
                 courseService,
                 sectionService,
                 departmentService,
-                tuitionService
+                tuitionService,
+                enrollmentService
         );
 
         int mainChoice;
@@ -41,6 +43,7 @@ public class Main {
             System.out.println("[4] Section Menu");
             System.out.println("[5] Department Menu");
             System.out.println("[6] Tuition Fee Menu");
+            System.out.println("[7] Enrollment Menu");
             System.out.println("[0] Exit");
             System.out.print("Enter choice: ");
             mainChoice = hh.nextInt();
@@ -333,6 +336,32 @@ public class Main {
                     } while (tChoice != 0);
                     break;
 
+                // ================= ENROLLMENT MENU =================
+                case 7:
+                    int eChoice;
+                    do {
+                        System.out.println("\nENROLLMENT MENU");
+                        System.out.println("[1] Enroll Student in Section");
+                        System.out.println("[2] View Department Hierarchy");
+                        System.out.println("[0] Back");
+                        System.out.print("Enter choice: ");
+                        eChoice = hh.nextInt();
+                        hh.nextLine();
+
+                        switch (eChoice) {
+                            case 1:
+                                System.out.print("Enter Student ID: ");
+                                int esid = hh.nextInt();
+                                System.out.print("Enter Section ID: ");
+                                int esecid = hh.nextInt();
+                                System.out.println(campusRegistrar.enrollStudentInSection(new Student(esid), new Section(esecid, "Target Section")));
+                                break;
+                            case 2:
+                                campusRegistrar.viewDepartmentHierarchy();
+                                break;
+                        }
+                    } while (eChoice != 0);
+                    break;
 
                 case 0:
                     System.out.println("Exiting system...");
