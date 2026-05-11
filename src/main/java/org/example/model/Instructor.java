@@ -1,21 +1,29 @@
 package org.example.model;
 
-public class Instructor extends Person{
+public class Instructor extends Person {
     private String course;
 
-    public Instructor(){}
+    public Instructor() {
+        super(0, "Unknown Instructor");
+        this.course = "TBD";
+    }
 
-    public Instructor(int ID, String name, String course){
+    public Instructor(int ID, String name, String course) {
         super(ID, name);
         this.course = course;
-
     }
 
-    public String getCourse(){
+    public String getCourse() {
         return course;
     }
-    public void setCourse(String course){
+
+    public void setCourse(String course) {
         this.course = course;
+    }
+
+    @Override
+    public void mainTask() {
+        System.out.println("Deliver lectures and grade assessments.");
     }
 
     @Override
@@ -25,9 +33,5 @@ public class Instructor extends Person{
                 ", Name='" + getName() + '\'' +
                 ", Course='" + course + '\'' +
                 '}';
-    }
-    @Override
-    public void  mainTask(){
-        System.out.println("I Teach");
     }
 }

@@ -43,3 +43,41 @@ Student:
 Instructor:
 
 ![img_9.png](img_9.png)
+
+**5. Interface**
+
+Campus Registrar:
+
+![img_10.png](img_10.png)
+
+Student:
+
+![img_11.png](img_11.png)
+![img_12.png](img_12.png)
+
+Course: 
+
+![img_13.png](img_13.png)
+![img_14.png](img_14.png)
+
+Instructor:
+
+![img_15.png](img_15.png)
+![img_16.png](img_16.png)
+
+
+**6. Added Entities**
+
+**[1] Section**
+
+Section
+
+![img_17.png](img_17.png)
+
+SectionRegistration
+
+![img_18.png](img_18.png)
+
+SectionRegistrationImpl
+
+![img_19.png](img_19.png)
