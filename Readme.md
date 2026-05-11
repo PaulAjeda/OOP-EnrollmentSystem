@@ -95,3 +95,17 @@ DepartmentRegistration
 DepartmentRegistrationImpl
 
 ![img_22.png](img_22.png)
+
+**[3] TuitionFeePayment**
+
+TuitionPayment
+
+![img_23.png](img_23.png)
+
+TuitionFeePayment
+
+![img_24.png](img_24.png)
+
+TuitionFeePaymentImpl
+
+![img_25.png](img_25.png)

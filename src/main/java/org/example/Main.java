@@ -15,9 +15,10 @@ public class Main {
         InstructorRegistrationImpl instructorRegistration = new InstructorRegistrationImpl();
         SectionRegistrationImpl sectionRegistration = new SectionRegistrationImpl();
         DepartmentRegistrationImpl departmentRegistration = new DepartmentRegistrationImpl();
+        TuitionFeePaymentImpl tuitionFeePayment = new TuitionFeePaymentImpl();
 
         // Facade
-        CampusRegistrar campusRegistrar = new CampusRegistrar(studentRegistration, courseRegistration, sectionRegistration, departmentRegistration);
+        CampusRegistrar campusRegistrar = new CampusRegistrar(studentRegistration, courseRegistration, sectionRegistration, departmentRegistration,  tuitionFeePayment);
 
         int mainChoice;
 
@@ -33,6 +34,7 @@ public class Main {
             System.out.println("[3] Instructor Menu");
             System.out.println("[4] Section Menu");
             System.out.println("[5] Department Menu");
+            System.out.println("[6] Tuition Fee Menu");
             System.out.println("[0] Exit");
             System.out.print("Enter choice: ");
             mainChoice = hh.nextInt();
@@ -276,6 +278,51 @@ public class Main {
                                 break;
                         }
                     } while (dChoice != 0);
+                    break;
+
+                // ================= TUITION FEE MENU =================
+                case 6:
+                    int tChoice;
+                    do {
+                        System.out.println("\nTUITION FEE MENU");
+                        System.out.println("[1] Calculate Fee");
+                        System.out.println("[2] Make Payment");
+                        System.out.println("[3] Check Balance");
+                        System.out.println("[4] Display Payment Info");
+                        System.out.println("[0] Back");
+                        System.out.print("Enter choice: ");
+                        tChoice = hh.nextInt();
+                        hh.nextLine();
+
+                        int tid;
+                        switch (tChoice) {
+                            case 1:
+                                System.out.print("Enter Student ID: ");
+                                tid = hh.nextInt();
+                                System.out.print("Enter Number of Units: ");
+                                int units = hh.nextInt();
+                                campusRegistrar.calculateFee(tid, units);
+                                break;
+                            case 2:
+                                System.out.print("Enter Student ID: ");
+                                tid = hh.nextInt();
+                                System.out.print("Enter Payment Amount: ");
+                                double amount = hh.nextDouble();
+                                System.out.println(campusRegistrar.makePayment(tid, amount));
+                                break;
+                            case 3:
+                                System.out.print("Enter Student ID: ");
+                                tid = hh.nextInt();
+                                double balance = campusRegistrar.getRemainingBalance(tid);
+                                System.out.println("Remaining Balance: " + balance);
+                                break;
+                            case 4:
+                                System.out.print("Enter Student ID: ");
+                                tid = hh.nextInt();
+                                campusRegistrar.displayPaymentInfo(tid);
+                                break;
+                        }
+                    } while (tChoice != 0);
                     break;
 
                 case 0:
