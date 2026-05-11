@@ -3,7 +3,7 @@ package org.example.service;
 import org.example.model.Department;
 import java.util.ArrayList;
 
-public class DepartmentRegistrationImpl implements DepartmentRegistration {
+public class DepartmentServiceImpl implements IDepartmentService {
     private ArrayList<Department> departmentList = new ArrayList<>();
 
     @Override
@@ -38,4 +38,3 @@ public class DepartmentRegistrationImpl implements DepartmentRegistration {
         return "Department not found";
     }
 }
-

@@ -10,15 +10,21 @@ public class Main {
         Scanner hh = new Scanner(System.in);
 
         // Service Implementations
-        StudentRegistrationImpl studentRegistration = new StudentRegistrationImpl();
-        CourseRegistrationImpl courseRegistration = new CourseRegistrationImpl();
-        InstructorRegistrationImpl instructorRegistration = new InstructorRegistrationImpl();
-        SectionRegistrationImpl sectionRegistration = new SectionRegistrationImpl();
-        DepartmentRegistrationImpl departmentRegistration = new DepartmentRegistrationImpl();
-        TuitionFeePaymentImpl tuitionFeePayment = new TuitionFeePaymentImpl();
+        IStudentService studentService = new StudentServiceImpl();
+        ICourseService courseService = new CourseServiceImpl();
+        IInstructorService instructorService = new InstructorServiceImpl();
+        ISectionService sectionService = new SectionServiceImpl();
+        IDepartmentService departmentService = new DepartmentServiceImpl();
+        ITuitionService tuitionService = new TuitionServiceImpl();
 
-        // Facade
-        CampusRegistrar campusRegistrar = new CampusRegistrar(studentRegistration, courseRegistration, sectionRegistration, departmentRegistration,  tuitionFeePayment);
+
+        CampusRegistrar campusRegistrar = new CampusRegistrar(
+                studentService,
+                courseService,
+                sectionService,
+                departmentService,
+                tuitionService
+        );
 
         int mainChoice;
 
@@ -50,9 +56,8 @@ public class Main {
                         System.out.println("[1] Add Student");
                         System.out.println("[2] Display Students");
                         System.out.println("[3] Update Student");
-                        System.out.println("[4] Delete Student");
+                        System.out.println("[4] Remove Student");
                         System.out.println("[0] Back");
-
                         System.out.print("Enter choice: ");
                         sChoice = hh.nextInt();
                         hh.nextLine();
@@ -83,10 +88,10 @@ public class Main {
                                 System.out.println(campusRegistrar.updateStudent(new Student(sid, sname, sprog)));
                                 break;
                             case 4:
-                                System.out.print("Enter ID to delete: ");
+                                System.out.print("Enter ID to remove: ");
                                 sid = hh.nextInt();
                                 hh.nextLine();
-                                System.out.println(campusRegistrar.deleteStudent(new Student(sid)));
+                                System.out.println(campusRegistrar.removeStudent(new Student(sid)));
                                 break;
                         }
                     } while (sChoice != 0);
@@ -100,9 +105,8 @@ public class Main {
                         System.out.println("[1] Add Course");
                         System.out.println("[2] Display Courses");
                         System.out.println("[3] Update Course");
-                        System.out.println("[4] Delete Course");
+                        System.out.println("[4] Remove Course");
                         System.out.println("[0] Back");
-
                         System.out.print("Enter choice: ");
                         cChoice = hh.nextInt();
                         hh.nextLine();
@@ -131,9 +135,9 @@ public class Main {
                                 System.out.println(campusRegistrar.updateCourse(new Course(cid, cname, cprog)));
                                 break;
                             case 4:
-                                System.out.print("Enter Course ID to delete: ");
+                                System.out.print("Enter Course ID to remove: ");
                                 cid = hh.nextLine();
-                                System.out.println(campusRegistrar.deleteCourse(new Course(cid, "", "")));
+                                System.out.println(campusRegistrar.removeCourse(new Course(cid, "", "")));
                                 break;
                         }
                     } while (cChoice != 0);
@@ -149,7 +153,6 @@ public class Main {
                         System.out.println("[3] Update Instructor");
                         System.out.println("[4] Delete Instructor");
                         System.out.println("[0] Back");
-
                         System.out.print("Enter choice: ");
                         iChoice = hh.nextInt();
                         hh.nextLine();
@@ -163,11 +166,11 @@ public class Main {
                                 String iname = hh.nextLine();
                                 System.out.print("Enter Course: ");
                                 String course = hh.nextLine();
-                                instructorRegistration.addInstructor(new Instructor(iid, iname, course));
+                                instructorService.addInstructor(new Instructor(iid, iname, course));
                                 System.out.println("Instructor added.");
                                 break;
                             case 2:
-                                instructorRegistration.displayALLInstructor();
+                                instructorService.displayALLInstructor();
                                 break;
                             case 3:
                                 System.out.print("Enter ID to update: ");
@@ -177,13 +180,13 @@ public class Main {
                                 iname = hh.nextLine();
                                 System.out.print("New Course: ");
                                 course = hh.nextLine();
-                                System.out.println(instructorRegistration.updateInstructor(new Instructor(iid, iname, course)));
+                                System.out.println(instructorService.updateInstructor(new Instructor(iid, iname, course)));
                                 break;
                             case 4:
                                 System.out.print("Enter ID to delete: ");
                                 iid = hh.nextInt();
                                 hh.nextLine();
-                                System.out.println(instructorRegistration.deleteInstructor(new Instructor(iid, "", "")));
+                                System.out.println(instructorService.deleteInstructor(new Instructor(iid, "", "")));
                                 break;
                         }
                     } while (iChoice != 0);
@@ -199,7 +202,6 @@ public class Main {
                         System.out.println("[3] Update Section");
                         System.out.println("[4] Delete Section");
                         System.out.println("[0] Back");
-
                         System.out.print("Enter choice: ");
                         secChoice = hh.nextInt();
                         hh.nextLine();
@@ -211,7 +213,9 @@ public class Main {
                                 hh.nextLine();
                                 System.out.print("Enter Section Name: ");
                                 String secname = hh.nextLine();
-                                campusRegistrar.addSection(new Section(secid, secname));
+                                System.out.print("Enter Max Capacity: ");
+                                int cap = hh.nextInt();
+                                campusRegistrar.addSection(new Section(secid, secname, cap));
                                 System.out.println("Section added.");
                                 break;
                             case 2:
@@ -223,7 +227,11 @@ public class Main {
                                 hh.nextLine();
                                 System.out.print("New Section Name: ");
                                 secname = hh.nextLine();
-                                System.out.println(campusRegistrar.updateSection(new Section(secid, secname)));
+                                System.out.print("New Max Capacity: ");
+                                cap = hh.nextInt();
+                                Section s = new Section(secid, secname);
+                                s.setMaxCapacity(cap);
+                                System.out.println(campusRegistrar.updateSection(s));
                                 break;
                             case 4:
                                 System.out.print("Enter Section ID to delete: ");
@@ -324,6 +332,7 @@ public class Main {
                         }
                     } while (tChoice != 0);
                     break;
+
 
                 case 0:
                     System.out.println("Exiting system...");

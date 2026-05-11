@@ -3,51 +3,107 @@ package org.example.service;
 import org.example.model.*;
 
 public class CampusRegistrar {
-    private StudentRegistration studentRegistration;
-    private CourseRegistration courseRegistration;
-    private SectionRegistration sectionRegistration;
-    private DepartmentRegistration departmentRegistration;
-    private TuitionFeePayment tuitionFeePayment;
+    private IStudentService studentService;
+    private ICourseService courseService;
+    private ISectionService sectionService;
+    private IDepartmentService departmentService;
+    private ITuitionService tuitionService;
 
-    public CampusRegistrar(StudentRegistration studentRegistration,
-                           CourseRegistration courseRegistration,
-                           SectionRegistration sectionRegistration,
-                           DepartmentRegistration departmentRegistration,
-                           TuitionFeePayment tuitionFeePayment) {
-        this.studentRegistration = studentRegistration;
-        this.courseRegistration = courseRegistration;
-        this.sectionRegistration = sectionRegistration;
-        this.departmentRegistration = departmentRegistration;
-        this.tuitionFeePayment = tuitionFeePayment;
+    public CampusRegistrar(IStudentService studentService,
+                           ICourseService courseService,
+                           ISectionService sectionService,
+                           IDepartmentService departmentService,
+                           ITuitionService tuitionService) {
+        this.studentService = studentService;
+        this.courseService = courseService;
+        this.sectionService = sectionService;
+        this.departmentService = departmentService;
+        this.tuitionService = tuitionService;
     }
 
     // Student operations
-    public void addStudent(Student student) { studentRegistration.addStudent(student); }
-    public void displayAllStudent() { studentRegistration.displayAllStudent(); }
-    public String updateStudent(Student student) { return studentRegistration.updateStudent(student); }
-    public String deleteStudent(Student student) { return studentRegistration.deleteStudent(student); }
+    public void addStudent(Student student) {
+        studentService.addStudent(student);
+    }
+
+    public void displayAllStudent() {
+        studentService.displayAllStudent();
+    }
+
+    public String updateStudent(Student student) {
+        return studentService.updateStudent(student);
+    }
+
+    public String removeStudent(Student student) {
+        return studentService.removeStudent(student);
+    }
 
     // Course operations
-    public void addCourse(Course course) { courseRegistration.addCourse(course); }
-    public void displayAllCourse() { courseRegistration.displayAllCourse(); }
-    public String updateCourse(Course course) { return courseRegistration.updateCourse(course); }
-    public String deleteCourse(Course course) { return courseRegistration.deleteCourse(course); }
+    public void addCourse(Course course) {
+        courseService.addCourse(course);
+    }
+
+    public void displayAllCourse() {
+        courseService.displayAllCourse();
+    }
+
+    public String updateCourse(Course course) {
+        return courseService.updateCourse(course);
+    }
+
+    public String removeCourse(Course course) {
+        return courseService.removeCourse(course);
+    }
 
     // Section operations
-    public void addSection(Section section) { sectionRegistration.addSection(section); }
-    public void displayAllSections() { sectionRegistration.displayAllSections(); }
-    public String updateSection(Section section) { return sectionRegistration.updateSection(section); }
-    public String deleteSection(Section section) { return sectionRegistration.deleteSection(section); }
+    public void addSection(Section section) {
+        sectionService.addSection(section);
+    }
+
+    public void displayAllSections() {
+        sectionService.displayAllSections();
+    }
+
+    public String updateSection(Section section) {
+        return sectionService.updateSection(section);
+    }
+
+    public String deleteSection(Section section) {
+        return sectionService.deleteSection(section);
+    }
 
     // Department operations
-    public void addDepartment(Department department) { departmentRegistration.addDepartment(department); }
-    public void displayAllDepartments() { departmentRegistration.displayAllDepartments(); }
-    public String updateDepartment(Department department) { return departmentRegistration.updateDepartment(department); }
-    public String deleteDepartment(Department department) { return departmentRegistration.deleteDepartment(department); }
+    public void addDepartment(Department department) {
+        departmentService.addDepartment(department);
+    }
+
+    public void displayAllDepartments() {
+        departmentService.displayAllDepartments();
+    }
+
+    public String updateDepartment(Department department) {
+        return departmentService.updateDepartment(department);
+    }
+
+    public String deleteDepartment(Department department) {
+        return departmentService.deleteDepartment(department);
+    }
 
     // Tuition operations
-    public void calculateFee(int studentID, int units) { tuitionFeePayment.calculateFee(studentID, units); }
-    public String makePayment(int studentID, double amount) { return tuitionFeePayment.makePayment(studentID, amount); }
-    public double getRemainingBalance(int studentID) { return tuitionFeePayment.getRemainingBalance(studentID); }
-    public void displayPaymentInfo(int studentID) { tuitionFeePayment.displayPaymentInfo(studentID); }
+    public void calculateFee(int studentID, int units) {
+        tuitionService.calculateFee(studentID, units);
+    }
+
+    public String makePayment(int studentID, double amount) {
+        return tuitionService.makePayment(studentID, amount);
+    }
+
+    public double getRemainingBalance(int studentID) {
+        return tuitionService.getRemainingBalance(studentID);
+    }
+
+    public void displayPaymentInfo(int studentID) {
+        tuitionService.displayPaymentInfo(studentID);
+    }
+
 }

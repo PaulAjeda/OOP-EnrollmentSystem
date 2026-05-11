@@ -42,13 +42,4 @@ public class Course {
         System.out.println("Course Name:" + getCourseName());
         System.out.println("Program:" + getProgram());
     }
-
-    @Override
-    public String toString() {
-        return "Course{" +
-                "courseID='" + courseID + '\'' +
-                ", courseName='" + courseName + '\'' +
-                ", program='" + program + '\'' +
-                '}';
-    }
 }

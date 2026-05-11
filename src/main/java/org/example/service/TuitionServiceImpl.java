@@ -1,12 +1,12 @@
 package org.example.service;
 
-import org.example.model.TuitionPayment;
+import org.example.model.TuitionFeePayment;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TuitionFeePaymentImpl implements TuitionFeePayment {
-    private Map<Integer, TuitionPayment> paymentMap = new HashMap<>();
-    private final double RATE_PER_UNIT = 500.0; // Sample rate
+public class TuitionServiceImpl implements ITuitionService {
+    private Map<Integer, TuitionFeePayment> paymentMap = new HashMap<>();
+    private final double RATE_PER_UNIT = 500.0;
 
     @Override
     public void calculateFee(int studentID, int units) {
@@ -14,14 +14,14 @@ public class TuitionFeePaymentImpl implements TuitionFeePayment {
         if (paymentMap.containsKey(studentID)) {
             paymentMap.get(studentID).setTotalFee(totalFee);
         } else {
-            paymentMap.put(studentID, new TuitionPayment(studentID, totalFee));
+            paymentMap.put(studentID, new TuitionFeePayment(studentID, totalFee));
         }
         System.out.println("Fee calculated: " + totalFee);
     }
 
     @Override
     public String makePayment(int studentID, double amount) {
-        TuitionPayment payment = paymentMap.get(studentID);
+        TuitionFeePayment payment = paymentMap.get(studentID);
         if (payment != null) {
             payment.addPayment(amount);
             return "Payment of " + amount + " received. Remaining: " + payment.getRemainingBalance();
@@ -31,13 +31,13 @@ public class TuitionFeePaymentImpl implements TuitionFeePayment {
 
     @Override
     public double getRemainingBalance(int studentID) {
-        TuitionPayment payment = paymentMap.get(studentID);
+        TuitionFeePayment payment = paymentMap.get(studentID);
         return (payment != null) ? payment.getRemainingBalance() : 0.0;
     }
 
     @Override
     public void displayPaymentInfo(int studentID) {
-        TuitionPayment payment = paymentMap.get(studentID);
+        TuitionFeePayment payment = paymentMap.get(studentID);
         if (payment != null) {
             System.out.println(payment);
         } else {

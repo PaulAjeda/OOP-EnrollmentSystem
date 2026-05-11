@@ -3,7 +3,7 @@ package org.example.service;
 import org.example.model.Section;
 import java.util.ArrayList;
 
-public class SectionRegistrationImpl implements SectionRegistration {
+public class SectionServiceImpl implements ISectionService {
     private ArrayList<Section> sectionList = new ArrayList<>();
 
     @Override
