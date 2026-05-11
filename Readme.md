@@ -137,3 +137,18 @@ IEnrollmentService:
 NewEntity-Enrollment Added
 
 ![img_30.png](img_30.png)
+
+**Phase 2: Minimum Coding Requirements**
+
+Institutional Hierarchy Viewing
+
+![img_31.png](img_31.png)
+
+Critical Validation
+
+![img_32.png](img_32.png)
+![img_33.png](img_33.png)
+![img_34.png](img_34.png)
+![img_35.png](img_35.png)
+![img_36.png](img_36.png)
+![img_37.png](img_37.png)
